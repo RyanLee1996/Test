@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE struts PUBLIC
+        "-//Apache Software Foundation//DTD Struts Configuration 2.5//EN"
+        "http://struts.apache.org/dtds/struts-2.5.dtd">
+<struts>
+    <!--由spring管理struts的Action实例/把bean转发给spring来创建-->
+    <!--<constant name="struts.objectFactory" value="spring"/>-->
+    <constant name="struts.enable.DynamicMethodInvocation" value="true" />
+    <!-- 所有匹配*.do的请求都由struts2处理 -->
+    <constant name="struts.action.extension" value="do" />
+    <!-- 请求参数的编码方式 -->
+    <constant name="struts.i18n.encoding" value="utf-8" />
+    <include file="struts-default.xml" />
+    <package name="default" extends="struts-default" namespace="/"  strict-method-invocation="false">
+        <global-allowed-methods>*</global-allowed-methods>
+        <action name="register" class="com.ssh.action.RegisterAction" method="execute">
+            <result name="input">/Register.jsp</result>
+            <result name="success">/Success.jsp</result>
+            <result name="error">/Fail.jsp</result>
+        </action>
+    </package>
+</struts>

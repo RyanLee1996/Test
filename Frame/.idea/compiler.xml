@@ -9,11 +9,7 @@
         <module name="Frame" />
       </profile>
     </annotationProcessing>
-<<<<<<< HEAD
-    <bytecodeTargetLevel>
-=======
     <bytecodeTargetLevel target="1.8">
->>>>>>> 03b57f75cbc5b3dccd96c6cc5c15b141ee0cafa7
       <module name="Frame" target="1.8" />
     </bytecodeTargetLevel>
   </component>

@@ -1,6 +1,6 @@
 <component name="ArtifactManager">
   <artifact type="exploded-war" name="Frame:war exploded">
-    <output-path>$PROJECT_DIR$/out/artifacts/Frame_war_exploded</output-path>
+    <output-path>$PROJECT_DIR$/target/Frame</output-path>
     <root id="root">
       <element id="directory" name="WEB-INF">
         <element id="directory" name="classes">
@@ -34,6 +34,9 @@
           <element id="library" level="project" name="Maven: org.slf4j:slf4j-jdk14:1.7.25" />
           <element id="library" level="project" name="Maven: org.slf4j:slf4j-api:1.7.25" />
         </element>
+      </element>
+      <element id="directory" name="META-INF">
+        <element id="file-copy" path="$PROJECT_DIR$/target/Frame/META-INF/MANIFEST.MF" />
       </element>
       <element id="javaee-facet-resources" facet="Frame/web/Web" />
     </root>

@@ -3,9 +3,7 @@
     "-//Hibernate/Hibernate Configuration DTD//EN"
     "http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
 <hibernate-configuration>
-
   <session-factory name="mysql">
-
     <property name="hibernate.connection.provider_class">
       com.alibaba.druid.support.hibernate.DruidConnectionProvider
     </property>

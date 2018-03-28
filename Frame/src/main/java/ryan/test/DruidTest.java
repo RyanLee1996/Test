@@ -1,7 +1,6 @@
 package ryan.test;
 
 import com.alibaba.druid.pool.DruidDataSource;
-import com.alibaba.druid.support.ibatis.DruidDataSourceFactory;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;

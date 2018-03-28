@@ -1,6 +1,8 @@
 package ryan.hibernate;
 
-public class StudentEntity {
+import java.io.Serializable;
+
+public class StudentEntity implements Serializable {
     private int id;
     private String name;
     private int age;

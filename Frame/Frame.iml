@@ -14,14 +14,14 @@
     <facet type="hibernate" name="Hibernate">
       <configuration>
         <datasource-map>
-          <unit-entry name="hibernate.cfg.xml" value="100e91e9-d78a-4efc-a701-f04261744eb5" />
+          <unit-entry name="mysql" />
         </datasource-map>
         <naming-strategy-map />
         <deploymentDescriptor name="hibernate.cfg.xml" url="file://$MODULE_DIR$/src/main/resources/hibernate.cfg.xml" />
       </configuration>
     </facet>
   </component>
-  <component name="NewModuleRootManager" LANGUAGE_LEVEL="JDK_1_5">
+  <component name="NewModuleRootManager" LANGUAGE_LEVEL="JDK_1_8">
     <output url="file://$MODULE_DIR$/target/classes" />
     <output-test url="file://$MODULE_DIR$/target/test-classes" />
     <content url="file://$MODULE_DIR$">
@@ -52,5 +52,10 @@
     <orderEntry type="library" name="Maven: commons-io:commons-io:2.5" level="project" />
     <orderEntry type="library" name="Maven: org.apache.commons:commons-lang3:3.6" level="project" />
     <orderEntry type="library" name="Maven: mysql:mysql-connector-java:5.1.45" level="project" />
+    <orderEntry type="library" name="Maven: com.alibaba:druid:1.1.8" level="project" />
+    <orderEntry type="library" name="Maven: org.hibernate:hibernate-ehcache:5.2.14.Final" level="project" />
+    <orderEntry type="library" name="Maven: net.sf.ehcache:ehcache:2.10.3" level="project" />
+    <orderEntry type="library" name="Maven: org.slf4j:slf4j-jdk14:1.7.25" level="project" />
+    <orderEntry type="library" name="Maven: org.slf4j:slf4j-api:1.7.25" level="project" />
   </component>
 </module>

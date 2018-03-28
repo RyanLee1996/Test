@@ -1,9 +1,10 @@
 package ryan.hibernate;
 
+import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
 
-public class CourseEntity {
+public class CourseEntity implements Serializable{
     private int id;
     private String name;
     private Set<StudentEntity> courseByStudent = new HashSet<StudentEntity>();

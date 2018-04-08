@@ -1,9 +1,10 @@
 package ryan.hibernate;
 
+import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
 
-public class OrderEntity {
+public class OrderEntity implements Serializable{
     private int id;
     private String time;
     private String status;

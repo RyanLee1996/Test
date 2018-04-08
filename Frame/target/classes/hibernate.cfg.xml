@@ -4,43 +4,10 @@
     "http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
 <hibernate-configuration>
   <session-factory name="mysql">
-    <property name="hibernate.connection.provider_class">
-      com.alibaba.druid.support.hibernate.DruidConnectionProvider
-    </property>
-    <property name="driverClassName">com.mysql.jdbc.Driver</property>
-    <property name="url">
-      jdbc:mysql://127.0.0.1:3306/frame?autoReconnect=true&amp;useUnicode=true&amp;characterEncoding=utf-8&amp;zeroDateTimeBehavior=convertToNull&amp;useSSL=false
-    </property>
-    <property name="username">root</property>
-    <property name="password">123456</property>
-
-    <!-- 配置初始化大小、最小、最大 -->
-    <property name="initialSize">1</property>
-    <property name="minIdle">1</property>
-    <property name="maxActive">20</property>
-
-    <!-- 配置获取连接等待超时的时间 -->
-    <property name="maxWait">60000</property>
-
-    <!-- 配置间隔多久才进行一次检测，检测需要关闭的空闲连接，单位是毫秒 -->
-    <property name="timeBetweenEvictionRunsMillis">60000</property>
-
-    <!-- 配置一个连接在池中最小生存的时间，单位是毫秒 -->
-    <property name="minEvictableIdleTimeMillis">300000</property>
-
-    <!-- 打开PSCache，并且指定每个连接上PSCache的大小 -->
-    <property name="poolPreparedStatements">true</property>
-    <property name="maxPoolPreparedStatementPerConnectionSize">20</property>
-
-    <!-- 配置监控统计拦截的filters，去掉后监控界面sql无法统计 -->
-    <property name="filters">stat</property>
-    <!-- JDBC connection pool (use the built-in) -->
-    <!--   <property name="connection.pool_size">5</property> -->
-
-    <!-- Disable the second-level cache  -->
-    <!--<property name="cache.provider_class">org.hibernate.cache.internal.NoCacheProvider</property>-->
-    <!--数据库驱动文件加载-->
-
+    <!--spring不可配置该属性-->
+    <!--<property name="hibernate.connection.provider_class">-->
+      <!--com.alibaba.druid.support.hibernate.DruidConnectionProvider-->
+    <!--</property>-->
     <!--SQL语句显示-->
     <property name="hibernate.show_sql">true</property>
     <!--结构化显示-->
@@ -48,7 +15,8 @@
     <!--InnoDB引擎的mysql方言-->
     <property name="hibernate.dialect">org.hibernate.dialect.MySQL5InnoDBDialect</property>
     <!-- 将Session与线程绑定=> 只有配置了该配置,才能使用getCurrentSession -->
-    <property name="hibernate.current_session_context_class">thread</property>
+    <!--<property name="hibernate.current_session_context_class">thread</property>-->
+    <property name="hibernate.current_session_context_class">org.springframework.orm.hibernate5.SpringSessionContext</property>
     <!--connection.useUnicode连接数据库时是否使用Unicode编码-->
     <property name="Connection.useUnicode">true </property>
     <!--以utf-8编码方式传输-->
@@ -62,15 +30,6 @@
     <!-- 高速缓存提供程序 -->
     <property name="hibernate.cache.region.factory_class">org.hibernate.cache.ehcache.EhCacheRegionFactory</property>
     <property name="hibernate.cache.provider_configuration_file_resource_path">/ehcache.xml</property>
-    <mapping resource="xml/CustomerEntity.hbm.xml"/>
-    <mapping resource="xml/GoodsEntity.hbm.xml"/>
-    <mapping resource="xml/DepartmentEntity.hbm.xml"/>
-    <mapping resource="xml/EmployeeEntity.hbm.xml"/>
-    <mapping resource="xml/OrderEntity.hbm.xml"/>
-    <mapping resource="xml/SkuEntity.hbm.xml"/>
-    <mapping resource="xml/StudentEntity.hbm.xml"/>
-    <mapping resource="xml/CourseEntity.hbm.xml"/>
-
   </session-factory>
 
 </hibernate-configuration>

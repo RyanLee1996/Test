@@ -3,11 +3,12 @@ package ryan.test;
 import org.hibernate.Session;
 import org.hibernate.query.Query;
 import org.junit.Test;
+import org.springframework.orm.hibernate5.support.HibernateDaoSupport;
 import ryan.tools.CreateSession;
 
 import java.util.List;
 
-public class StudentCourseTest {
+public class StudentCourseTest extends HibernateDaoSupport {
     @Test
     public  void getMaxPopularCourseName() {
         CreateSession createSession = new CreateSession();
@@ -44,17 +45,17 @@ public class StudentCourseTest {
         createSession.destroy(session);
     }
     public static void main(String[] args) {
-        CreateSession createSession = new CreateSession();
-        Session session = createSession.getSession();
-        String hql = "select s.name,s.profession,c.name from StudentEntity s  join  s.courseid c";
-        Query query = session.createQuery(hql);
-        int page = 2;
-        int count = 5;
-        query.setFirstResult((page-1)*count).setMaxResults(count);
-        List<Object[]> list = query.list();
-        for (Object[] o:list) {
-            System.out.println(o[0]+" "+o[1]+" "+o[2]);
-        }
-        createSession.destroy(session);
+//        CreateSession createSession = new CreateSession();
+//        Session session = createSession.getSession();
+//        String hql = "select s.name,s.profession,c.name from StudentEntity s  join  s.courseid c";
+//        Query query = session.createQuery(hql);
+//        int page = 2;
+//        int count = 5;
+//        query.setFirstResult((page-1)*count).setMaxResults(count);
+//        List<Object[]> list = query.list();
+//        for (Object[] o:list) {
+//            System.out.println(o[0]+" "+o[1]+" "+o[2]);
+//        }
+//        createSession.destroy(session);
     }
 }

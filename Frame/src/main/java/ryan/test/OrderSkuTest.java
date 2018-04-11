@@ -1,23 +1,39 @@
 package ryan.test;
 
-import org.hibernate.Session;
-import org.hibernate.Transaction;
+
 import org.junit.Test;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
+import org.springframework.orm.hibernate5.HibernateTemplate;
+import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 import ryan.hibernate.OrderEntity;
 import ryan.hibernate.SkuEntity;
-import ryan.tools.CreateSession;
 
+
+@Repository
+@Transactional
 public class OrderSkuTest {
+    public HibernateTemplate getHibernateTemplate() {
+        return hibernateTemplate;
+    }
+    @Transactional("transactionManager")
+    public void setHibernateTemplate(HibernateTemplate hibernateTemplate) {
+        this.hibernateTemplate = hibernateTemplate;
+    }
+
+    private HibernateTemplate hibernateTemplate;
     /*多对多测试*/
     @Test
+    @Transactional(value = "transactionManager",readOnly=true)
     public void test() {
-        CreateSession createSession = new CreateSession();
-        Session session = createSession.getSession();
-        Transaction transaction = session.beginTransaction();
+        ApplicationContext context =  new ClassPathXmlApplicationContext("applicationContext.xml");
+        OrderSkuTest sku = (OrderSkuTest) context.getBean("sku");
         OrderEntity order1 = new OrderEntity();
         OrderEntity order2 = new OrderEntity();
         OrderEntity order3 = new OrderEntity();
-        order1.setTime("第一个");
+        order1.setTime("afafa");
         order2.setTime("第二个");
         order3.setTime("第三个");
         SkuEntity sku1 = new SkuEntity();
@@ -29,17 +45,15 @@ public class OrderSkuTest {
         sku2.setPrice(6666);
         sku3.setName("神舟pc");
         sku3.setPrice(5555);
-
         order1.getOrderBySkuID().add(sku1);
         order1.getOrderBySkuID().add(sku2);
         order2.getOrderBySkuID().add(sku2);
         order2.getOrderBySkuID().add(sku3);
         order3.getOrderBySkuID().add(sku1);
         order3.getOrderBySkuID().add(sku3);
-        session.save(order1);
-        session.save(order2);
-        session.save(order3);
-        transaction.commit();
-        createSession.destroy(session);
+        sku.getHibernateTemplate().setCheckWriteOperations(false);
+        sku.getHibernateTemplate().save(order1);
+        sku.getHibernateTemplate().save(order2);
+        sku.getHibernateTemplate().save(order3);
     }
 }

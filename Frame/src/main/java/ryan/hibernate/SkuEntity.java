@@ -1,9 +1,10 @@
 package ryan.hibernate;
 
+import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
 
-public class SkuEntity {
+public class SkuEntity implements Serializable {
     private int id;
     private String name;
     private int price;

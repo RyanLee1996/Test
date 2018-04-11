@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:mvc="http://www.springframework.org/schema/cache"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans-4.1.xsd
+		http://www.springframework.org/schema/aop
+		http://www.springframework.org/schema/aop/spring-aop-4.1.xsd
+		http://www.springframework.org/schema/context
+		http://www.springframework.org/schema/context/spring-context-4.1.xsd http://www.springframework.org/schema/cache http://www.springframework.org/schema/cache/spring-cache.xsd">
+
+    <!--**********************视图解析器**********************-->
+    <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver"/>
+
+    <!--**********************处理器适配器**********************-->
+    <!--Controller接口适配器-->
+    <bean class="org.springframework.web.servlet.mvc.SimpleControllerHandlerAdapter"/>
+    <!--HttpRequestHandler接口适配器-->
+    <bean class="org.springframework.web.servlet.mvc.HttpRequestHandlerAdapter"/>
+
+
+    <!--**********************处理器映射器**********************-->
+    <!--将bean的name作为url进行查找，需要配置Handler时指定bean-name-->
+    <bean class="org.springframework.web.servlet.handler.BeanNameUrlHandlerMapping"/>
+    <!--简单url映射-->
+    <bean class="org.springframework.web.servlet.handler.SimpleUrlHandlerMapping">
+        <property name="mappings">
+            <props>
+                <prop key="/test.do">testController</prop>
+            </props>
+        </property>
+    </bean>
+
+
+    <!--**********************配置Handler**********************-->
+    <bean name="/simple.do" class="pri.ryan.controller.SimpleController"/>
+    <bean id="testController" class="pri.ryan.controller.TestController"/>
+
+    <!--**********************注解配置**********************-->
+    <!--注解适配器-->
+    <bean class="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter"/>
+    <!--注解映射器-->
+    <bean class="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping"/>
+    <!--<mvc:annotation-driven/>会同时加载适配器和映射器，并会加载多个参数，一般使用这个-->
+    <mvc:annotation-driven/>
+    <!--自动扫描注入Bean-->
+    <context:component-scan base-package="pri.ryan.controller"/>
+
+</beans>

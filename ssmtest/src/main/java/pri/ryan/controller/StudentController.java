@@ -1,6 +1,7 @@
 package pri.ryan.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -14,6 +15,7 @@ import java.util.List;
 @RequestMapping("/st")
 public class StudentController {
     @Autowired
+    @Qualifier("studentService")
     private StudentService studentService;
     @RequestMapping(path = "/queryInfoByName", method = RequestMethod.GET)
     public ModelAndView queryStudentList(String name){

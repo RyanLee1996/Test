@@ -10,10 +10,9 @@
 <html>
 <head>
     <title>Title</title>
-
 </head>
 <body>
-<c:forEach items="studentList" var="student">
+<c:forEach items="${studentList}" var="student">
 <table class="table table-striped">
     <tr>
         <td>${student.id}</td>

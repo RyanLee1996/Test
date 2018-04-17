@@ -5,15 +5,15 @@
 <!-- mapper代理开发规范 -->
 <!-- namespace命名空间，作用就是对sql进行分类化管理，理解sql隔离 -->
 <!-- 注意：使用mapper代理方法开发，namespace有特殊重要的作用，namespace等于mapper接口地址 -->
-<mapper namespace="pri.ryan.mapper.StudentMapper">
-    <select id="queryStudentById" parameterType="int" resultType="student">
-        SELECT * FROM student WHERE id=#{id}
+<mapper namespace="pri.ryan.mapper.UserMapper">
+    <select id="getUserPassword" parameterType="java.lang.String" resultType="user">
+        SELECT * FROM users WHERE name=#{name}
     </select>
 
     <!-- 根据用户名称模糊查询用户信息，可能返回多条 resultType：指定就是单条记录所映射的java对象 类型 ${}:表示拼接sql串，将接收到参数的内容不加任何修饰拼接在sql中。
         使用${}拼接sql，引起 sql注入 ${value}：接收输入 参数的内容，如果传入类型是简单类型，${}中只能使用value -->
-    <select id="queryStudentByName" parameterType="java.lang.String"
-            resultType="student">
-        SELECT * FROM student WHERE name LIKE '%${value}%'
-    </select>
+    <!--<select id="queryStudentByName" parameterType="java.lang.String"-->
+            <!--resultType="student">-->
+        <!--SELECT * FROM student WHERE name LIKE '%${value}%'-->
+    <!--</select>-->
 </mapper>

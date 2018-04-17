@@ -16,6 +16,7 @@
     <mvc:default-servlet-handler/>
     <!--<mvc:annotation-driven/>会同时加载适配器和映射器，并会加载多个参数，一般使用这个-->
     <mvc:annotation-driven/>
+
     <!--自动扫描注入Bean-->
     <context:component-scan base-package="pri.ryan.controller"/>
     <!--**********************视图解析器**********************-->

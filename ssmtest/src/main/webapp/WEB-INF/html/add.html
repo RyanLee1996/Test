@@ -1,0 +1,25 @@
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>Title</title>
+    <link  rel="stylesheet" href="../css/bootstrap.min.css" type="text/css">
+</head>
+<body>
+<form action="./addHouseBooking.do" method="post">
+    起始地区：<select name="area">
+    <option value="高新区" >高新区</option>
+    <option value="青羊区" >青羊区</option>
+    <option value="武侯区" >武侯区</option>
+    <option value="双流区" >双流区</option>
+    <option value="成华区" >成华区</option>
+    </select><br>
+        所用车型：<input type="radio" name="cartype" value="金杯"/>金杯
+        <input type="radio" name="cartype" value="皮卡"/>皮卡
+        <input type="radio" name="cartype" value="厢式货车"/>厢式货车<br>
+        搬家日期：<input type="text" name="movedate"/>日期格式为：2018-04-16<br>
+        联系人：  <input type="text" name="contact"/><br>
+        联系电话：<input type="text" name="phone"/><br>
+        <input type="submit" value="预约登记">
+</form>
+</body>
+</html>

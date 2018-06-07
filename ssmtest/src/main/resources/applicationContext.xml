@@ -15,48 +15,39 @@
     <context:annotation-config />
     <context:component-scan base-package="pri.ryan.serivce"/>
     <context:property-placeholder location="classpath:db.properties" />
-    <!-- 数据库连接池 -->
-    <bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource"
-          destroy-method="close">
-        <property name="driverClass" value="${jdbc.driverClass}" />
-        <property name="jdbcUrl" value="${jdbc.jdbcUrl}" />
-        <property name="user" value="${jdbc.user}" />
+    <!-- 数据源druid -->
+    <bean id="dataSource" class="com.alibaba.druid.pool.DruidDataSource"
+          init-method="init" destroy-method="close">
+        <property name="driverClassName" value="${jdbc.driverClassName}" />
+        <property name="url" value="${jdbc.url}" />
+        <property name="username" value="${jdbc.username}" />
         <property name="password" value="${jdbc.password}" />
-        <property name="minPoolSize" value="${jdbc.miniPoolSize}" />
-        <property name="maxPoolSize" value="${jdbc.maxPoolSize}" />
-        <property name="initialPoolSize" value="${jdbc.initialPoolSize}" />
-        <property name="maxIdleTime" value="${jdbc.maxIdleTime}" />
-        <property name="acquireIncrement" value="${jdbc.acquireIncrement}" />
 
-        <property name="acquireRetryAttempts" value="${jdbc.acquireRetryAttempts}" />
-        <property name="acquireRetryDelay" value="${jdbc.acquireRetryDelay}" />
-        <property name="testConnectionOnCheckin" value="${jdbc.testConnectionOnCheckin}" />
-        <property name="automaticTestTable" value="${jdbc.automaticTestTable}" />
-        <property name="idleConnectionTestPeriod" value="${jdbc.idleConnectionTestPeriod}" />
-        <property name="checkoutTimeout" value="${jdbc.checkoutTimeout}" />
+        <!-- 配置初始化大小、最小、最大 -->
+        <property name="initialSize" value="${druid.pool.size.init}" />
+        <property name="minIdle" value="${druid.pool.size.min}" />
+        <property name="maxActive" value="${druid.pool.size.max}" />
+
+        <!-- 配置监控统计拦截的filters，wall用于防止sql注入，stat用于统计分析 -->
+        <property name="filters" value="wall,stat"/>
     </bean>
+
     <!-- sqlSessinFactory -->
     <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
         <!-- 加载mybatis的配置文件 -->
-        <property name="configLocation" value="classpath:MyBatis.xml" />
+        <property name="configLocation" value="classpath:mybatis-config.xml" />
         <!-- 数据源 -->
         <property name="dataSource" ref="dataSource" />
         <!--扫描Mapper-->
         <property name="mapperLocations" value="classpath:sqlMapper/*Mapper.xml"/>
     </bean>
+
+    
     <!--事务管理器类-->
     <bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
         <property name="dataSource" ref="dataSource"/>
     </bean>
 
-    <!--<bean id="ehCacheManager" class="org.springframework.cache.ehcache.EhCacheManagerFactoryBean">-->
-        <!--<property name="configLocation" value="classpath:ehcache.xml" />-->
-        <!--<property name="shared" value="true"/>-->
-    <!--</bean>-->
-    <!--&lt;!&ndash; 开启spring缓存 &ndash;&gt;-->
-    <!--<cache:annotation-driven cache-manager="cacheManager" />-->
-    <!--<bean id="cacheManager" class="org.springframework.cache.ehcache.EhCacheCacheManager">-->
-        <!--<property name="cacheManager" ref="ehCacheManager"/>-->
-    <!--</bean>-->
+
 </beans>
 

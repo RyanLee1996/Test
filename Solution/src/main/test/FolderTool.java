@@ -101,36 +101,21 @@ public abstract class FolderTool {
         return this.recombination(newStr);
     }
     private static String replaceBrace(String str){
-        int startIndex = str.indexOf("[");
-        if (startIndex < 0){
-            startIndex = str.indexOf("(");
-            if (startIndex < 0){
-                startIndex = str.indexOf("（");
-                if (startIndex < 0){
-                    startIndex = str.indexOf("{");
-                    if (startIndex < 0){
-                        startIndex = str.indexOf("｛");
-                        if (startIndex < 0){
-                            startIndex = str.indexOf("【");
-                        }
-                    }
-                }
+        String[] startBraceArray = {"[","(","（","{","｛","【","《"};
+        String[] endBraceArray = {"]",")","）","}","｝","】","》"};
+        int startIndex = -1;
+        int endIndex = -1;
+
+        for (String  startBrace : startBraceArray){
+            startIndex = str.indexOf(startBrace);
+            if (startIndex>=0){
+                break;
             }
         }
-        int endIndex = str.indexOf("]");
-        if (endIndex < 0){
-            endIndex = str.indexOf(")");
-            if (endIndex < 0){
-                endIndex = str.indexOf("）");
-                if (endIndex < 0){
-                    endIndex = str.indexOf("}");
-                    if (endIndex < 0){
-                        endIndex = str.indexOf("｝");
-                        if (endIndex < 0){
-                            endIndex = str.indexOf("】");
-                        }
-                    }
-                }
+        for (String  endBrace : endBraceArray){
+            endIndex = str.indexOf(endBrace);
+            if (endIndex>=0){
+                break;
             }
         }
         if (startIndex >= 0 && endIndex >= 0) {
@@ -229,20 +214,20 @@ public abstract class FolderTool {
         double kilobytes = 0;
         double megabytes = 0;
         double gigabytes = 0;
-        if (bytes>1024){
+        if (bytes>1000){
             kilobytes = (bytes / 1024);
         }
-        if (kilobytes>1024){
+        if (kilobytes>1000){
             megabytes = (kilobytes / 1024);
         }
-        if (megabytes>1024){
+        if (megabytes>1000){
             gigabytes  = (megabytes / 1024);
         }
-        if (gigabytes>1){
-            return String.format("%.2f", megabytes) + "GB";
-        }else if (megabytes>1){
+        if (gigabytes>0){
+            return String.format("%.2f", gigabytes) + "GB";
+        }else if (megabytes>0){
             return String.format("%.0f", megabytes) + "MB";
-        }else if (kilobytes>1){
+        }else if (kilobytes>0){
             return String.format("%.0f", kilobytes) + "KB";
         }else {
             return bytes + "B";
@@ -328,6 +313,9 @@ public abstract class FolderTool {
                 deleteFile(subFile.getPath(),deleteFileRule);
             }
         }
+    }
+    public void deleteFile(String[] deleteFileRule){
+        deleteFile(startPath,deleteFileRule);
     }
     public static void deleteLog(){
         deleteFile(startPath,new String[]{"log"});

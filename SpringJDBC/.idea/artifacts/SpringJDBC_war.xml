@@ -1,8 +1,0 @@
-<component name="ArtifactManager">
-  <artifact type="war" name="SpringJDBC:war">
-    <output-path>$PROJECT_DIR$/target</output-path>
-    <root id="archive" name="SpringJDBC.war">
-      <element id="artifact" artifact-name="SpringJDBC:war exploded" />
-    </root>
-  </artifact>
-</component>

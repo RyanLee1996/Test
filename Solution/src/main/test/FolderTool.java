@@ -12,10 +12,10 @@ import java.util.regex.Pattern;
 public abstract class FolderTool {
     private static String startPath = "";
 
-    private static final String WARN_LOG_PATH = "autoScript-warning.log";
+    public static final String WARN_LOG_PATH = "autoScript-warning.log";
     private static final String FOLDER_INFO_PATH = "autoScript-folderInfo.log";
-    private static final String SUCCESS_LOG_PATH = "autoScript-success.log";
-    private static final String DEBUG_LOG_PATH = "autoScript-debug.log";
+    public static final String SUCCESS_LOG_PATH = "autoScript-success.log";
+    public static final String DEBUG_LOG_PATH = "autoScript-debug.log";
     private static final String SUBFOLDER_LOG_PATH = "autoScript-subfolder.log";
 
     private static final String[] PICTURE_EXTENSION = {"jpg","png","jpeg","gif","bmp","svg","psd"};
@@ -38,8 +38,6 @@ public abstract class FolderTool {
     }
 
     public abstract  String recombination(String fileName);
-
-
     public  void folderNameChange(boolean isPrefix ,String regex){
         folderNameChange(startPath,isPrefix,regex);
     }
@@ -89,7 +87,6 @@ public abstract class FolderTool {
         }
         System.out.println("操作结束");
     }
-
     private  String stringRecombination(String str){
         String newStr = str;
         String temp = replaceBrace(str);
@@ -236,7 +233,7 @@ public abstract class FolderTool {
     private static boolean ignoreCaseEquals(String str1,String str2){
         return str1 == null ? str2 == null :str1.equalsIgnoreCase(str2);
     }
-    private static void logFileWriter(String content,String infoType,String logPath){
+    public static void logFileWriter(String content,String infoType,String logPath){
         try {
             File file = new File(startPath+"\\"+logPath);
             String data = getNowTime() + " " + infoType + ": " + content + ";\r\n";

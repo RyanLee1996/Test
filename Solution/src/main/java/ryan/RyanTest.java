@@ -1,9 +1,14 @@
+package ryan;
+
+import org.junit.Test;
+
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class Test {
-    public static void main(String[] args) {
-        String s = "G:\\丝袜美腿\\美腿新模第412期\\1326023X4E0-144019.jpg";
+public class RyanTest {
+    @Test
+    public void main() {
+        String s = "4564564";
         System.out.println(s);
         Matcher matcher = Pattern.compile("(^.*)\\\\(.*?\\\\.*?$)").matcher(s);
         while (matcher.find()){

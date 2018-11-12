@@ -1,5 +1,3 @@
-import org.junit.Test;
-
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -36,15 +34,5 @@ public class FolderToolByXR extends FolderTool{
 //        String regex = ".*\\\\\\[.*?]XR.*?(N.*?)\\s(.*?)\\s(.*?)$";
 //        FolderToolByXR tool = new FolderToolByXR("F:\\秀人网");
 //        tool.folderNameChange(false,regex);
-
-        setFilter();
-    }
-
-    public static void setFilter(){
-        java.text.DecimalFormat df = new java.text.DecimalFormat("#.00");
-        String s1 = df.format(0.968);
-        String s2 = df.format(3.1465926);
-        System.out.println("s:" + s1);
-        System.out.println("s:" + String.format("%.0f",0.968));
     }
 }

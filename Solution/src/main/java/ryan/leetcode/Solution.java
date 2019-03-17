@@ -38,7 +38,23 @@ public class Solution {
     public class ListNode {
         int val;
         ListNode next;
-
+        @Override
+        public String toString() {
+            StringBuilder s = new StringBuilder(String.valueOf(val));
+            ListNode temp = next;
+            while(temp != null){
+                s.append(",").append(temp.val);
+                temp = temp.next;
+            }
+            return s.toString();
+        }
+        public void addLast(ListNode node){
+            ListNode temp = this;
+            while(temp.next != null){
+                temp = temp.next;
+            }
+            temp.next = node;
+        }
         ListNode(int x) {
             val = x;
         }
@@ -202,52 +218,260 @@ public class Solution {
         }
         return 0.0;
     }
-    public List<List<Integer>> threeSum(int[] nums) {
-        Set<List<Integer>> result = new HashSet<>();
-        if (nums.length < 3){
-            return new ArrayList<>(result);
+
+    public ListNode removeNthFromEnd(ListNode head, int n) {
+        if (n < 1) return head;
+        ListNode temp = new ListNode(0);
+        temp.next = head;
+        ListNode left = temp;
+        ListNode right = temp;
+        while (n >= 0 && right != null) {
+            right = right.next;
+            n--;
         }
-        int reverse  = 0;
-        Arrays.sort(nums);
-        int min =  - nums[nums.length - 1] - nums[nums.length - 1];
-        if (nums[0] > 0 || nums[nums.length - 1] < 0 ){
-            return new ArrayList<>(result);
+        while(right != null){
+            right = right.next;
+            left = left.next;
         }
-        Map<Integer,Integer> map  = new HashMap<>();
-        for (int i = nums.length - 1; i >= 0; i--) {
-            map.put(nums[i],i);
+        if (n < 0){
+            left.next = left.next.next;
         }
-        int left = 1;
-        int rightIndex = nums.length - 1;
-        for (int i = 0; i < nums.length - 1 && nums[i] <= 0; i++) {
-            if (nums[i] < min || left == nums[i]){
-                continue;
-            }
-            left = nums[i];
-            int right = -1;
-            for (int j = rightIndex; j > i +1 && nums[j] >= - left/2; j--) {
-                if (nums[j] > - left*2){
-                    rightIndex = j - 1;
-                    continue;
-                }
-                if (right == nums[j]){
-                    continue;
-                }
-                right = nums[j];
-                reverse = - left - right;
-                if (map.containsKey(reverse)
-                        &&(i < map.get(reverse)
-                            || (i == map.get(reverse) && left == nums[i + 1]))){
-                    result.add(Arrays.asList(left,reverse,right));
-                }
+        return temp.next;
+    }
+    public boolean isValid(String s) {
+        Stack<Character> stack = new Stack<>();
+        for (Character c : s.toCharArray()) {
+            if (c=='(' || c=='[' || c=='{') {
+                stack.push(c);
+            } else if (stack.empty()
+                    || (c==')' && stack.pop()!='(')
+                    || (c==']' && stack.pop()!='[')
+                    || (c=='}' && stack.pop()!='{')) {
+                return false;
             }
         }
-        return new ArrayList<>(result);
+        return stack.empty();
+    }
+    public ListNode mergeTwoLists(ListNode l1, ListNode l2) {
+        if (l1 == null || l2 == null){
+            return l1 == null ? l2 : l1;
+        }
+        ListNode small = l1;
+        ListNode large = l2;
+        if (l1.val > l2.val){
+            small = l2;
+            large = l1;
+        }
+        ListNode res = small;
+        while(small.next != null && small.next.val <= large.val){
+            small = small.next;
+        }
+        small.next = mergeTwoLists(small.next,large);
+        return res;
+    }
+    public List<String> generateParenthesis(int n) {
+        Set<String> res = new HashSet<>();
+        res.add("");
+        String cur;
+        Set<String> set;
+        Iterator<String> iterator;
+        for (int i = 0;i < n;i++){
+            iterator = res.iterator();
+            set = new HashSet<>();
+            while (iterator.hasNext()){
+                cur = iterator.next();
+                set.add(cur+"()");
+                set.add("()"+cur);
+                set.add("("+cur+")");
+            }
+            res = set;
+        }
+        return new ArrayList<>(res);
+    }
+    public ListNode mergeKLists(ListNode[] lists) {
+        if (lists == null || lists.length == 0) return null;
+        return dac(lists,0,lists.length - 1);
+    }
+    private ListNode dac(ListNode[] lists,int startIndex,int endIndex) {
+        int len = endIndex - startIndex + 1;
+        if (len == 1){
+            return lists[startIndex];
+        }
+        ListNode node1, node2;
+        if (len == 2){
+            node1 = lists[startIndex];
+            node2 = lists[endIndex];
+        }else {
+            node1 = dac(lists,startIndex,startIndex + len/2 - 1);
+            node2 = dac(lists,startIndex + len/2,endIndex);
+        }
+        ListNode res = new ListNode(0);
+        ListNode cur = res;
+        while (node1 != null && node2 != null) {
+            if (node1.val < node2.val) {
+                cur.next = node1;
+                cur = cur.next;
+                node1 = node1.next;
+            } else {
+                cur.next = node2;
+                cur = cur.next;
+                node2 = node2.next;
+            }
+        }
+        cur.next = node1 == null ? node2 : node1;
+        return res.next;
+    }
+    public ListNode swapPairs(ListNode head) {
+        if(head == null || head.next == null) return head;
+        ListNode pre = new ListNode(0);
+        ListNode res = pre;
+        ListNode mid = head;
+        pre.next = mid;
+        ListNode last = head.next;
+        while (mid != null && last != null){
+            mid.next = last.next;
+            last.next = mid;
+            pre.next = last;
+            pre = mid;
+            mid = mid.next;
+            if (mid != null){
+                last = mid.next;
+            }
+        }
+        return res.next;
+    }
+    public ListNode reverseKGroup(ListNode head, int k) {
+        if (k < 2) return head;/*无需翻转*/
+        if(head == null) return null;/*非空判断*/
+        int len = 0;
+        ListNode cur = head;
+        while (cur != null){/*计算长度*/
+            cur = cur.next;
+            len++;
+        }
+        if (k > len) return head;/*无需翻转*/
+        ListNode res = new ListNode(0);/*记录翻转结果*/
+        res.next = head;
+        /*前置指针、移动指针、后置指针*/
+        ListNode pre = res;
+        cur = head;
+        ListNode next = head.next;
+        for (int i  = 0; i < len/k; i++){
+            for (int step = 1; step < k; step++){/*记录步长*/
+                cur.next = next.next;
+                next.next = pre.next;
+                pre.next = next;
+                next = cur.next;
+            }
+            pre = cur;
+            cur = next;
+            if (next != null){
+                next = next.next;
+            }
+        }
+        return res.next;
+    }
+    public int removeDuplicates(int[] nums) {
+        if (nums == null) return 0;
+        if (nums.length < 2) return nums.length;
+        int dcr = nums[0];
+        int hand = 1;
+        for (int i = 1; i < nums.length; i++) {
+            if (nums[i] != dcr){
+                nums[hand] = nums[i];
+                dcr = nums[i];
+                hand++;
+            }
+        }
+        return hand;
+    }
+    public int removeElement(int[] nums, int val) {
+        if (nums == null) return 0;
+        int hand = 0;
+        for (int i = 0; i < nums.length; i++) {
+            if (nums[i] != val){
+                nums[hand] = nums[i];
+                hand++;
+            }
+        }
+        return hand;
+    }
+    public int strStr(String haystack, String needle) {
+        if (needle == null || needle.length() == 0) return 0;
+        if (haystack == null || needle.length() > haystack.length()) return -1;
+        int[] next = next(needle);
+        int i = 0, j = 0;
+        while(i < haystack.length()){
+            if (haystack.charAt(i) == needle.charAt(j)){
+                i++;
+                j++;
+                if (j == needle.length()){
+                    return i - j;
+                }
+            }else if (j == 0){
+                i++;
+            }else {
+                j = next[j - 1] + 1;
+            }
+        }
+        return -1;
+    }
+    private int[] next(String needle){
+        int[] res = new int[needle.length()];
+        res[0] = -1;
+        int index = -1;
+        for (int i = 1; i < needle.length(); i++) {
+            while (index > -1 && needle.charAt(index + 1) != needle.charAt(i)){
+                index = res[index];
+            }
+            if (needle.charAt(index + 1) == needle.charAt(i)){
+                index++;
+            }
+            res[i] = index;
+        }
+        return res;
+    }
+    public int divide(int dividend, int divisor) {
+        if (dividend == Integer.MIN_VALUE && divisor == -1) return Integer.MAX_VALUE;
+        if (divisor == 1) return dividend;
+        if (divisor == dividend) return 1;
+        if (divisor == Integer.MIN_VALUE) return 0;
+        boolean flag = divisor < 0 ^ dividend < 0;
+        divisor = divisor < 0 ? -divisor : divisor;
+        long remainder = dividend;
+        remainder = remainder < 0 ? -remainder : remainder;
+        if (divisor > remainder) return 0;
+        int res = 0;
+        long realDivisor, quotient;
+        while (remainder >= divisor){
+            quotient  = 1;
+            realDivisor = divisor;
+            while (realDivisor <= remainder){
+                quotient <<= 1;
+                realDivisor <<= 1;
+            }
+            remainder -= realDivisor >> 1;
+            res += quotient >> 1;
+        }
+        return flag ? -res : res;
     }
     public static void main(String[] args) {
-//        System.out.println(new Solution().threeSum( new int[] {-1,0,1,2,-1,-4}));
-        System.out.println(new Solution().threeSum( new int[] {-10,-3,-8,-3,4,-1,-2,-4,-8,-5}));
-//        System.out.println(3/2);
+        Solution solution = new Solution();
+        System.out.println(solution.divide(Integer.MIN_VALUE,-2));
+//        System.out.println(solution.strStr("bacbababadbbabacambabacaddababacasdsd","ababaca"));
+//        System.out.println(solution.removeElement(new int[]{0,1,2,2,3,0,4,2},2));
+//        ListNode node = solution.new ListNode(1);
+//        node.addLast(solution.new ListNode(2));
+//        node.addLast(solution.new ListNode(3));
+//        node.addLast(solution.new ListNode(4));
+//        node.addLast(solution.new ListNode(5));
 
+//        ListNode node1 = solution.new ListNode(5);
+//        node1.next = solution.new ListNode(5);
+//        System.out.println(solution.mergeTwoLists(node,node1));
+//        System.out.println(new Solution().removeNthFromEnd(node,1));
+//        System.out.println(solution.isValid(")"));
+//        System.out.println(solution.generateParenthesis(4));
+//        System.out.println(solution.reverseKGroup(node,2));
     }
 }

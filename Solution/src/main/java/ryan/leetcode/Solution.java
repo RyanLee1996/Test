@@ -450,6 +450,7 @@ public class Solution {
                 quotient <<= 1;
                 realDivisor <<= 1;
             }
+
             remainder -= realDivisor >> 1;
             res += quotient >> 1;
         }
@@ -458,6 +459,7 @@ public class Solution {
     public static void main(String[] args) {
         Solution solution = new Solution();
         System.out.println(solution.divide(Integer.MIN_VALUE,-2));
+        Arrays. asList ("1","2","3"). forEach (x -> System. out. println (x));
 //        System.out.println(solution.strStr("bacbababadbbabacambabacaddababacasdsd","ababaca"));
 //        System.out.println(solution.removeElement(new int[]{0,1,2,2,3,0,4,2},2));
 //        ListNode node = solution.new ListNode(1);

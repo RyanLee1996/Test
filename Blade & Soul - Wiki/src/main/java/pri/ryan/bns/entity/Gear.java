@@ -9,14 +9,17 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import java.io.Serializable;
+
 @Entity
 @Data
-@AllArgsConstructor
 @NoArgsConstructor
-public class MaterialInfo implements Serializable {
-    private static final long serialVersionUID = 1L;
+@AllArgsConstructor
+public class Gear implements Serializable {
+    private static final long serialVersionUID = 3L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
+    private String name;
+    private Integer gearType;
+    private boolean binding;
 }

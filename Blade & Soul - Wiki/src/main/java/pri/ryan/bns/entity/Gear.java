@@ -4,6 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.data.annotation.Id;
+import pri.ryan.bns.constant.GearType;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -22,4 +23,8 @@ public class Gear implements Serializable {
     private String name;
     private Integer gearType;
     private boolean binding;
+
+    public void setGearType(GearType gearType) {
+        this.gearType = gearType.getKey();
+    }
 }

@@ -1,30 +1,33 @@
 package pri.ryan.bns.entity;
 
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.data.annotation.Id;
 import pri.ryan.bns.constant.GearType;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
+import javax.persistence.*;
 import java.io.Serializable;
+
 
 @Entity
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
+@ApiModel(value = "装备实体类")
 public class Gear implements Serializable {
     private static final long serialVersionUID = 3L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    @Column(nullable = false, unique = true)
     private String name;
-    private Integer gearType;
-    private boolean binding;
-
-    public void setGearType(GearType gearType) {
-        this.gearType = gearType.getKey();
-    }
+    @Column(nullable = false)
+    @Enumerated(EnumType.ORDINAL)
+    private GearType gearType;
+    @ApiModelProperty(value = "是否可以封印")
+    @Column(nullable = false)
+    private boolean seal;
 }

@@ -2,22 +2,25 @@ package pri.ryan.bns.entity;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 import org.springframework.data.annotation.Id;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
-import java.util.Date;
+import java.io.Serializable;
+import java.sql.Time;
 
 @Entity
 @Data
 @AllArgsConstructor
-public class MaterialPrice {
+@NoArgsConstructor
+public class MaterialPrice implements Serializable {
     private static final long serialVersionUID = 2L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private Long MaterialId;
+    private Long materialId;
     private Integer price;
-    private Date createTime;
+    private Time createTime;
 }

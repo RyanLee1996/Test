@@ -10,6 +10,7 @@ import pri.ryan.bns.constant.GearType;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.Date;
 
 
 @Entity
@@ -24,10 +25,12 @@ public class Gear implements Serializable {
     private Long id;
     @Column(nullable = false, unique = true)
     private String name;
-    @Column(nullable = false)
     @Enumerated(EnumType.ORDINAL)
+    @Column(nullable = false)
     private GearType gearType;
     @ApiModelProperty(value = "是否可以封印")
     @Column(nullable = false)
     private boolean seal;
+    @Column(nullable = false)
+    private Date updateTime;
 }

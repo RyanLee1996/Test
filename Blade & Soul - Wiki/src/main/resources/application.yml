@@ -1,0 +1,13 @@
+spring:
+  profiles:
+    active: pro #使用生成环境配置
+
+  datasource:
+    #MySQL数据库驱动
+    driver-class-name: com.mysql.jdbc.Driver
+    #数据库连接地址
+    url: jdbc:mysql://localhost:3306/bns?useSSL=false
+    #数据库连接名
+    username: root
+    #数据库连接密码
+    password: 120623

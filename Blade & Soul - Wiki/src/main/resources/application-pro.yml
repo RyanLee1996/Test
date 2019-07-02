@@ -1,0 +1,13 @@
+spring:
+  jpa:
+    #hibernate实现jpa
+    hibernate:
+      #数据表的创建方式
+      #      update: 创建表，如表结构有变则更新；
+      #      create-drop: 每次项目启动删除之前表并新建，项目停止时删除所有表，本文选择此项，方便测试；
+      #      create: 每次项目启动删除之前表并新建；
+      #      none: 不使用自动创建功能；
+      #      validate: 验证表结构等，但不对数据库做修改。
+      ddl-auto: update
+    #是否在控制台显示SQL语句
+    show-sql: true

@@ -5,7 +5,7 @@ import lombok.Getter;
 
 @Getter
 @AllArgsConstructor
-public enum GearType {
+public enum GearTypeEnum {
     WEAPON(1,"武器"),
     ENERGY_STONE(2,"元气石"),
     POWER_STONE(3,"真气石"),

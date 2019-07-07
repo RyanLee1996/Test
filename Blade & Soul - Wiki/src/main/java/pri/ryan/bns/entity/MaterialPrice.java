@@ -20,7 +20,8 @@ import java.sql.Time;
 @NoArgsConstructor
 @ApiModel(value = "材料价格实体类")
 public class MaterialPrice implements Serializable {
-    private static final long serialVersionUID = 2L;
+
+    private static final long serialVersionUID = -3659383022807967835L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;

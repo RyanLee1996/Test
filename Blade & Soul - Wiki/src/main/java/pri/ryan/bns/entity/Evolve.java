@@ -6,11 +6,11 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.data.annotation.Id;
-import pri.ryan.bns.constant.EvolveType;
+import pri.ryan.bns.constant.EvolveTypeEnum;
 
 import javax.persistence.*;
 import java.io.Serializable;
-import java.util.Date;
+import java.time.LocalDateTime;
 
 @Entity
 @Data
@@ -18,7 +18,8 @@ import java.util.Date;
 @AllArgsConstructor
 @ApiModel(value = "升级路线实体类")
 public class Evolve implements Serializable {
-    private static final long serialVersionUID = 4L;
+
+    private static final long serialVersionUID = 2212002470691913050L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -26,7 +27,7 @@ public class Evolve implements Serializable {
     private Long currentGearId;
     @Enumerated(EnumType.ORDINAL)
     @Column(nullable = false)
-    private EvolveType evolveType;
+    private EvolveTypeEnum evolveTypeEnum;
     @ApiModelProperty(value = "祭品装备编号")
     private Long offeringGearId;
     @ApiModelProperty(value = "目标装备编号")
@@ -34,7 +35,9 @@ public class Evolve implements Serializable {
     private Long goalGearId;
     @ApiModelProperty(value = "所需铜币")
     @Column(nullable = false)
-    private Integer money;
+    private Integer fee;
     @Column(nullable = false)
-    private Date updateTime;
+    private LocalDateTime creatTime;
+    @Column(nullable = false)
+    private LocalDateTime updateTime;
 }

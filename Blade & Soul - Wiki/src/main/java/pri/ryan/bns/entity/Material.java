@@ -6,7 +6,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.data.annotation.Id;
-import pri.ryan.bns.constant.MaterialType;
+import pri.ryan.bns.constant.MaterialTypeEnum;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -18,7 +18,8 @@ import java.util.Date;
 @AllArgsConstructor
 @ApiModel(value = "材料实体类")
 public class Material implements Serializable {
-    private static final long serialVersionUID = 1L;
+
+    private static final long serialVersionUID = -2758715295713824754L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -26,7 +27,7 @@ public class Material implements Serializable {
     private String name;
     @Enumerated(EnumType.ORDINAL)
     @Column(nullable = false)
-    private MaterialType materialType;
+    private MaterialTypeEnum materialTypeEnum;
     @ApiModelProperty(value = "是否可以交易")
     @Column(nullable = false)
     private boolean binding;

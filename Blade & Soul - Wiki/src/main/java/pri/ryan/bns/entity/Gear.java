@@ -6,11 +6,11 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.data.annotation.Id;
-import pri.ryan.bns.constant.GearType;
+import pri.ryan.bns.constant.GearTypeEnum;
 
 import javax.persistence.*;
 import java.io.Serializable;
-import java.util.Date;
+import java.time.LocalDateTime;
 
 
 @Entity
@@ -19,7 +19,8 @@ import java.util.Date;
 @AllArgsConstructor
 @ApiModel(value = "装备实体类")
 public class Gear implements Serializable {
-    private static final long serialVersionUID = 3L;
+
+    private static final long serialVersionUID = 4075109263810730300L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -27,10 +28,12 @@ public class Gear implements Serializable {
     private String name;
     @Enumerated(EnumType.ORDINAL)
     @Column(nullable = false)
-    private GearType gearType;
+    private GearTypeEnum gearTypeEnum;
     @ApiModelProperty(value = "是否可以封印")
     @Column(nullable = false)
     private boolean seal;
     @Column(nullable = false)
-    private Date updateTime;
+    private LocalDateTime creatTime;
+    @Column(nullable = false)
+    private LocalDateTime updateTime;
 }
